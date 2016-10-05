@@ -24,18 +24,35 @@ var app = {
 			}
 		},
 		
+	callPlayer : function(player){
+			
+		var call = $('.call').html("joueur " + player + " à toi de jouer");
+		return call;
+
+	},
+
+	rollPlayer : function(){
+		if(app.playerOne === 1){
+			app.playerOne-- ;
+			app.playerTwo++ ;
+			app.callPlayer(2);
+		}else{
+			app.playerOne++ ;
+			app.playerTwo-- ;
+			app.callPlayer(1);
+		}
+	},
 
 	unit : function(){
+	
 		var len = app['tr'].length;
-
+		app.callPlayer(1);
 		$('button').click(function(){
 			if(app.playerOne === 1 ){
-				app.playerOne = 0 ;
-				app.playerTwo = 1 ;
+				app.rollPlayer();
 				app.changeColor($(this).data('y'),"red",len);
 			}else{
-				app.playerOne = 1 ;
-				app.playerTwo = 0 ;
+				app.rollPlayer();
 				app.changeColor($(this).data('y'),"yellow",len);
 			}	
 		});
